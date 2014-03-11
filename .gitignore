@@ -1,2 +1,3 @@
-SafeContainer.xcodeproj/project.xcworkspace
-SafeContainer.xcodeproj/xcuserdata
+project.xcworkspace
+xcuserdata
+.DS_Store
