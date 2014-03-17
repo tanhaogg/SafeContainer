@@ -10,6 +10,7 @@
 #import "QMSafeMutableArray.h"
 #import "QMSafeMutableDictionary.h"
 
+void testSafe(void);
 void testArray(void);
 void testDictionary(void);
 
@@ -17,11 +18,46 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        
+        testSafe();
         //testArray();
-        testDictionary();
+        //testDictionary();
     }
     return 0;
+}
+
+void testSafe(void)
+{
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+    
+    QMSafeMutableArray *safeArray = [[QMSafeMutableArray alloc] init];
+    for (int i=0; i<100; i++)
+    {
+        //并发添加
+        [queue addOperationWithBlock:^{
+            for (int i=0; i<100; i++)
+                [safeArray addObject:@(i)];
+        }];
+        
+        //并发删除
+        [queue addOperationWithBlock:^{
+            for (int i=0; i<100; i++)
+                [safeArray removeLastObject];
+        }];
+        
+        //并发遍历
+        [queue addOperationWithBlock:^{
+            [safeArray lock];
+            for (id item in safeArray)
+            {
+                //do something
+            }
+            [safeArray unlock];
+        }];
+    }
+    
+    [queue waitUntilAllOperationsAreFinished];
+    NSLog(@"over");
 }
 
 void testArray(void)

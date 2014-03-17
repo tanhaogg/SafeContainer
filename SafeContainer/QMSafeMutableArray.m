@@ -136,4 +136,16 @@
     return result;
 }
 
+#pragma mark NSLocking
+
+- (void)lock
+{
+    [_safeLock lock];
+}
+
+- (void)unlock
+{
+    [_safeLock unlock];
+}
+
 @end

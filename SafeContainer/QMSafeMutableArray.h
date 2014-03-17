@@ -7,6 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QMSafeMutableArray : NSMutableArray
+@interface QMSafeMutableArray : NSMutableArray <NSLocking>
 
 @end

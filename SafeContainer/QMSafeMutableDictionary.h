@@ -7,6 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QMSafeMutableDictionary : NSMutableDictionary
+@interface QMSafeMutableDictionary : NSMutableDictionary <NSLocking>
 
 @end
