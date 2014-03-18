@@ -78,7 +78,7 @@
 - (NSEnumerator *)keyEnumerator
 {
     [_safeLock lock];
-    id result = [(__bridge id)_dictionary objectEnumerator];
+    id result = [(__bridge id)_dictionary keyEnumerator];
     [_safeLock unlock];
     return result;
 }
