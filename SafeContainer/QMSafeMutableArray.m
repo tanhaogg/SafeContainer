@@ -68,7 +68,7 @@
     if (index > count) {
         index = count;
     }
-    CFArraySetValueAtIndex(_array, index, (__bridge const void *)anObject);
+    CFArrayInsertValueAtIndex(_array, index, (__bridge const void *)anObject);
     [_safeLock unlock];
 }
 
